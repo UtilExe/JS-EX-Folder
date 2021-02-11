@@ -7,7 +7,7 @@ class OsInfo {
     platform = os.platform();
     eol = os.EOL;
     
-    // could also just retrieve the object directly in the tester class
+    // could also just retrieve the object directly in the tester class.
     trigger = () => {
         console.log(`Platform: ${this.platform}`);
         console.log(`osType: ${this.type}`);
