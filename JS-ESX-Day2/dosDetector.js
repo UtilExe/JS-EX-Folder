@@ -13,8 +13,8 @@ class DOS_Detector extends EventEmitter {
         if(deltaTime < this.TIME_BETWEEN_CALLS){
         //  console.log("TODO: Fire the 'DosDetected' event")
 
-        // Raise an event. - signalling an event has happened. Also, need to register a listener, that is interested in this event. A listener is a function that will be called when the event is raised.
-          this.emit('DoS', {url : url, timeBetweenCals : deltaTime});
+          // Raise an event. - signalling an event has happened. Also, need to register a listener, that is interested in this event. A listener is a function that will be called when the event is raised.
+          this.emit('DoS', {url : url, timeBetweenCalls : deltaTime});
           //Add this info to the event {url:url,timeBetweenCalls:deltaTime}
         }
       }
