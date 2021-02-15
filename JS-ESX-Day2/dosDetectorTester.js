@@ -1,7 +1,17 @@
 const DosDetector = require('./dosDetector')
 
-const tester = new DosDetector();
-//tester.urls = 'https://emucoach.com'
-tester.urls.set('https://emucoach.com', 10)
-tester.TIME_BETWEEN_CALLS = 1;
-tester.addUrl('https://emucoach.com')
+const tester = new DosDetector(2000);
+
+// Register a listener. on is alias for addListener()
+tester.on('DoS', (arg) => { // Eventlistener with callback
+    console.log('DoS attack detected', arg);
+});
+
+tester.addUrl('https://google.com')
+
+setTimeout(() => {
+    tester.addUrl("https://google.com");
+}, 1000)
+setTimeout(() => {
+    tester.addUrl("https://google.com");
+}, 2000)
