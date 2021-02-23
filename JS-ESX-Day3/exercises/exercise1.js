@@ -41,38 +41,46 @@ Hint: Use the demo code here as a guideline for how to do this (it's that simple
 Since the result from one calculation does not influence the next (only order matters), use Promise.all(..) to execute the operations in parallel.
 */
 
+// Not used, as it's handled directly atm. Would need to push into the array (randoms) of the object, to make it use-able.
 const randomStringsB = {
     title: "6 Secure Randoms",
     randoms: []
 }
 
-var myPromise = (sizeValue) =>
+var makeSecureRandoms = (sizeValue) =>
     new Promise(function (resolve, reject) {
         crypto.randomBytes(sizeValue, (err, buffer) => {
-        var value = { "length:": sizeValue, "random:": buffer.toString('hex') }
             if (err) {
                 return reject(new Error("UPPPPPPPPS"))
             }
+            var value = { "length:": sizeValue, "random:": buffer.toString('hex') }
+            randomStringsB.randoms.push(value)
             resolve(value);
         });
     })
 
-// To prevent this many duplicates below, could probably make a forEach loop that instanties. Or what would the best way to do it be? (Ask Lars perhaps.)
-const p1 = myPromise(sizeValue = 48)
-const p2 = myPromise(sizeValue = 40)
-const p3 = myPromise(sizeValue = 32)
-const p4 = myPromise(sizeValue = 24)
-const p5 = myPromise(sizeValue = 16)
-const p6 = myPromise(sizeValue = 8)
+/*
+const p1 = makeSecureRandoms(sizeValue = 48)
+const p2 = makeSecureRandoms(sizeValue = 40)
+const p3 = makeSecureRandoms(sizeValue = 32)
+const p4 = makeSecureRandoms(sizeValue = 24)
+const p5 = makeSecureRandoms(sizeValue = 16)
+const p6 = makeSecureRandoms(sizeValue = 8)
 const promises = [p1, p2, p3, p4, p5, p6]
-
-/*var test
-var i = 0;
-for (i = 48; i >= 8; i -= 8) {
-    test = myPromise(sizeValue = i) // takes only the last, due to lack of +=, but if I use += it won't retrieve the data properly.
-    promises = [test]
-}*/
 
 Promise.all(promises)
     .then(d => console.log(d))
     .catch(e => console.log("Error ", e))
+*/
+
+// c) Refactor your solution into a module and export it
+module.exports = makeSecureRandoms;
+
+// ****************************************************  Attempt to prevent the duplicate..
+// To prevent this many duplicates below, could probably make a forEach loop that instanties. Or what would the best way to do it be? (Ask Lars perhaps.)
+/*var test
+var i = 0;
+for (i = 48; i >= 8; i -= 8) {
+    test = makeSecureRandoms(sizeValue = i) // takes only the last, due to lack of +=, but if I use += it won't retrieve the data properly.
+    promises = [test]
+}*/
