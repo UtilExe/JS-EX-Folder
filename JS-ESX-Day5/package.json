@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "ex": "ts-node ./src/interfaces_1.ts"
+    "ex": "ts-node ./src/interfaces_1.ts",
+    "ex2": "ts-node ./src/interfaces_2.ts"
   },
   "keywords": [],
   "author": "",
