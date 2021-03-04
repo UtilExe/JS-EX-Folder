@@ -1,0 +1,21 @@
+{
+  "name": "typescript-day1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "ex": "ts-node ./src/externalDemo.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.168",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.2"
+  }
+}
