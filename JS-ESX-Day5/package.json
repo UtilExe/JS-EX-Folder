@@ -8,7 +8,8 @@
     "ex": "ts-node ./src/interfaces_1.ts",
     "ex2": "ts-node ./src/interfaces_2.ts",
     "ex3": "ts-node ./src/chuckNorrisFetcher.ts",
-    "ex4": "ts-node ./src/generic_task.ts"
+    "ex4": "ts-node ./src/generic_task.ts",
+    "ex5": "ts-node ./src/classes_and_inheritance.ts"
   },
   "keywords": [],
   "author": "",
