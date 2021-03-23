@@ -4,8 +4,20 @@ const router = Router();
 import facade from "../facades/DummyDB-Facade"
 import {ApiError} from "../errors/apiError"
 
+const cors = require("cors");
+
+// Enable all CORS requests:
+// app.use(cors())
+
+// Configuring CORS:
+var corsOptions = {
+    // origin: 'http://localhost:3001',
+    origin: '*',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
 // getAll
-router.get("/all", async (req, res) => {
+router.get("/all", cors(corsOptions), async (req, res) => {
     // my note: should be handled by DTO instead, to not retrieve the password and only output certain fields, on the endpoint.
     const friends = await facade.getAllFriends();
     //res.json(friends);

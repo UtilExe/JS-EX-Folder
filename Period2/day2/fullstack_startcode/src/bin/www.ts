@@ -4,5 +4,4 @@ const debug = d("www");
 
 const PORT = process.env.PORT || 3333;
 
-console.log(debug)
 app.listen(PORT, () => debug(`Server started, listening on PORT: ${PORT}`))
