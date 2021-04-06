@@ -10,6 +10,7 @@ import { Request, Response, NextFunction } from "express"
 import { ApiError } from "./errors/apiError";
 
 import logger, { stream } from "./middleware/logger";
+import authMiddleware from "./middleware/basic-auth";
 const morganFormat = process.env.NODE_ENV == "production" ? "combined" : "dev"
 app.use(require("morgan")(morganFormat, { stream }));
 logger.log("info", "Server started");
@@ -40,10 +41,6 @@ app.use((req, res, next) => {
 // Mere Midleware....
 app.use(express.static(path.join(process.cwd(), "public")))
 
-app.get("/demo", (req, res) => {
-  res.send("Server is up!");
-})
-
 // cors are only being used on the below endpoints (our api etc. - not the above ones - as intended)
 // Own CORS Middleware
 /*import cors from "./middleware/myCors"
@@ -56,7 +53,15 @@ app.use("/api", (req, res, next) => {
   res.status(404).json({ errorCode: 404, msg: "Not found" })
 })
 
-// 
+app.use("/", authMiddleware)
+app.get("/demo", (req, res) => {
+  res.send("Server is up!");
+})
+app.get("/me", (req:any, res) => {
+  const user = req.credentials;
+  res.json(user);
+})
+
 // types are from import {Request, Response} from "express"
 // //Makes JSON error-response for ApiErrors, otherwise pass on to default error handler
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {

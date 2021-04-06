@@ -1,4 +1,5 @@
 import express from "express";
+
 const cors = express()
 cors.use((request, response, next) => {
     response.header("Access-Control-Allow-Origin", "*");

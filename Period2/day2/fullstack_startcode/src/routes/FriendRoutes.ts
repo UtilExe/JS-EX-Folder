@@ -5,6 +5,8 @@ import facade from "../facades/DummyDB-Facade"
 import {ApiError} from "../errors/apiError"
 
 const cors = require("cors");
+import authMiddleware from "../middleware/basic-auth";
+router.use(authMiddleware)
 
 // Enable all CORS requests:
 // app.use(cors())
@@ -24,9 +26,9 @@ router.get("/all", cors(corsOptions), async (req, res) => {
 
     // here we make a DTO instead:
     const friendsDTO = friends.map(friend => {
-        const { firstName, lastName } = friend; // destructuring
-        // return {firstName: firstName, lastName: lastName} // svarer til samme som nedenfor (at vi læser firstName og lastName fra L13)
-        return { firstName, lastName } // laver et objekt, med en property der hedder firstName, og en property der hedder lastName. Læser properties data fra L13.
+        const { firstName, lastName, email } = friend; // destructuring
+        // return {firstName: firstName, lastName: lastName} // svarer til samme som nedenfor (at vi læser firstName og lastName fra L13). nedenstående er blot et shortcut da variabel-navnet hedder det samme .
+        return { firstName, lastName, email } // laver et objekt, med en property der hedder firstName, og en property der hedder lastName. Læser properties data fra L13.
     })
     res.json(friendsDTO)
 })
