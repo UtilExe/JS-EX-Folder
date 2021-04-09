@@ -10,7 +10,8 @@
     "dev:debug": "nodemon --inspect src/bin/www.ts",
     "test": "mocha --exit  -r ts-node/register test/**/*.ts",
     "test:debug": "mocha --exit -r ts-node/register --inspect test/**/*.ts",
-    "test2": "mocha --exit  -r ts-node/register playground/usingnock/whattodoTest.ts"
+    "test2": "mocha --exit  -r ts-node/register playground/usingnock/whattodoTest.ts",
+    "test2:debug": "mocha --exit -r ts-node/register --inspect playground/usingnock/whattodoTest.ts"
   },
   "nodemonConfig": {
     "ignore": [

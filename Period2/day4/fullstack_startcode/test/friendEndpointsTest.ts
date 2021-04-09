@@ -136,6 +136,7 @@ describe("### Describe the Friend Endpoints (/api/friends) ###", function () {
 
   describe("While verifying the delete any user, given a userId (email)", function () {
     it("It should allow an admin user to delete Donald Duck", async () => {
+      
       const response = await request
       .delete('/api/friends/dd@b.dk')
       .auth("aa@a.dk", "secret")
