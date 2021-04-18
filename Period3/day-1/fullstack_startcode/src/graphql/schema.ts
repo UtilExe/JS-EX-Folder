@@ -22,7 +22,7 @@ const typeDefs = `
         Only required if you ALSO wan't to try a version where the result is fetched from the existing endpoint
         """
         getAllFriendsProxy: [Friend]!
-        
+        getFriendByEmail(input:String): Friend
     }
     input FriendInput {
         firstName: String!
