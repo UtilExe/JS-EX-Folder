@@ -36,6 +36,9 @@ const typeDefs = `
         password: String
         email: String!
     }
+    input FriendEmailInput {
+        email: String!
+    }
     type Mutation {
         """
         Allows anyone (non authenticated users) to create a new friend
@@ -43,6 +46,8 @@ const typeDefs = `
         createFriend(input: FriendInput): Friend
 
         editFriend(input:FriendEditInput): Friend
+
+        deleteFriend(input:FriendEmailInput): Friend
        
     }
 `;

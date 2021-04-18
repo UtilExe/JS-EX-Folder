@@ -44,6 +44,7 @@ export const resolvers = {
       })
   },
 
+  // could have used IFriend and FriendEmailInput in schema.ts instead of a string as type, like on deleteFriend. But doing both, to show either works.
   getFriendByEmail: (root: any, { input }: { input: string }) => {
     return friendFacade.getFriendFromEmail(input);
     }
@@ -55,6 +56,9 @@ export const resolvers = {
     },
     editFriend: async (_: object, { input }: { input: IFriend }) => {
       return friendFacade.editFriendV2(input.email, input)
-    }
+    },
+    deleteFriend: async (_: object, { input }: { input: IFriend }) => {
+      return friendFacade.deleteFriend(input.email)
+    },
   },
 };
