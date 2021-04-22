@@ -12,6 +12,7 @@ import AddFriend from "./AddFriend";
 import AllFriends from "./AllFriends"
 import FindFriend from "./FindFriend"
 import DeleteFriend from "./DeleteFriend"
+import EditFriend from "./EditFriend"
 import Home from "./Home"
 
 const URI = "http://localhost:5555/graphql"
@@ -41,6 +42,9 @@ export default function App() {
           <li>
             <NavLink exact activeClassName="selected" to="/deleteFriend">Delete Friend</NavLink>
           </li>
+          <li>
+            <NavLink exact activeClassName="selected" to="/editFriend">Edit Friend</NavLink>
+          </li>
         </ul>
 
         <hr />
@@ -62,6 +66,9 @@ export default function App() {
             </Route>
             <Route path="/deleteFriend">
               <DeleteFriend />
+            </Route>
+            <Route path="/editFriend">
+              <EditFriend />
             </Route>
 
           </Switch>
