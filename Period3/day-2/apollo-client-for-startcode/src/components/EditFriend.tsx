@@ -12,12 +12,6 @@ mutation editFriend($friend:FriendEditInput){
   }
 }
 `
-interface IFriendInput {
-    firstName: string
-    lastName: string
-    password: string
-    email: string
-  }
 
 type AddFriendProps = {
   initialFriend?: ILyndaFriend
