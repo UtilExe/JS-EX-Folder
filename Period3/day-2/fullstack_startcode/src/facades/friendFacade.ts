@@ -178,15 +178,13 @@ class FriendsFacade {
    */
   // Completed method
   async deleteFriend(friendEmail: string): Promise<boolean> {
-    const count = await this.friendCollection.deleteOne(
-      {email: friendEmail}
-    )
-    if (count.deletedCount && count.deletedCount > 0) {
-    return Promise.resolve(true)
-  } else {
-    return Promise.resolve(false)
-  }
-}
+    const friend: IFriend = await this.friendCollection.findOne({ email: friendEmail })
+        if (friend) {
+            this.friendCollection.deleteOne({ email: friendEmail });
+            return true;
+        }
+        return false;
+    }
 
   async getAllFriends(): Promise<Array<IFriend>> {
     const users: unknown = await this.friendCollection.find({}).toArray();

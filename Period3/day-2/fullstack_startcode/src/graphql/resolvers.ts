@@ -61,7 +61,8 @@ export const resolvers = {
       return friendFacade.editFriendV2(input.email, input)
     },
     deleteFriend: async (_: object, { input }: { input: IFriend }) => {
-      return friendFacade.deleteFriend(input.email)
+      const est = friendFacade.deleteFriend(input.email)
+      return est;
     },
   },
 };

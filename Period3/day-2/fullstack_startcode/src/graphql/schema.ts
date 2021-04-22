@@ -47,7 +47,7 @@ const typeDefs = `
 
         editFriend(input:FriendEditInput): Friend
 
-        deleteFriend(input:FriendEmailInput): Friend
+        deleteFriend(input:FriendEmailInput): Boolean
        
     }
 `;

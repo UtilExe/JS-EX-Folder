@@ -9,8 +9,6 @@ mutation createFriend($friend:FriendInput){
     firstName
     lastName
     email
-    age
-    gender
     id
   }
 }
@@ -25,7 +23,8 @@ interface IKeyableFriend extends ILyndaFriend {
 }
 
 const AddFriend = ({ initialFriend }: AddFriendProps) => {
-  const EMPTY_FRIEND: ILyndaFriend = { firstName: "", lastName: "", gender: "OTHER", age: 0, email: "", role: "user" }
+ // const EMPTY_FRIEND: ILyndaFriend = { firstName: "", lastName: "", gender: "OTHER", age: 0, email: "", role: "user" }
+ const EMPTY_FRIEND: ILyndaFriend = { firstName: "", lastName: "", email: "", password: "" }
   let newFriend = initialFriend ? initialFriend : { ...EMPTY_FRIEND }
   const [friend, setFriend] = useState({ ...newFriend })
 
@@ -38,10 +37,10 @@ const AddFriend = ({ initialFriend }: AddFriendProps) => {
       if (!d) {
         return
       }
-      let allFriends = d.allFriends
+      let getAllFriends = d.getAllFriends
       cache.writeQuery({
         query: ALL_FRIENDS,
-        data: { allFriends: [...allFriends, addedFriend] }
+        data: { getAllFriends: [...getAllFriends, addedFriend] }
       })
     }
   }
@@ -80,21 +79,18 @@ const AddFriend = ({ initialFriend }: AddFriendProps) => {
         <input type="text" id="lastName" value={friend.lastName} onChange={handleChange} />
       </label>
       <br />
+      <br />
       <label>
-        Gender &nbsp;
-          <select id="gender" value={friend.gender} onChange={handleChange}>
-          <option value="MALE">Male</option>
-          <option value="FEMALE">Female</option>
-          <option value="OTHER">Other</option>
-        </select>
+        Password <br />
+        <input type="text" id="password" value={friend.password} onChange={handleChange} />
       </label>
       <br />
       <label>
-        Age <br />
-        <input type="number" id="age" value={friend.age} onChange={handleChange} />
+        Email <br />
+        <input type="text" id="email" value={friend.email} onChange={handleChange} />
       </label>
-      <br /><br />
-      <input type="submit" value="Save Friend" />
+      <br />
+      <input type="submit" value="Add Friend" />
     </form>
   );
 }

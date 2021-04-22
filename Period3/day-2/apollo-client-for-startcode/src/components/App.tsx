@@ -11,6 +11,7 @@ import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client"
 import AddFriend from "./AddFriend";
 import AllFriends from "./AllFriends"
 import FindFriend from "./FindFriend"
+import DeleteFriend from "./DeleteFriend"
 import Home from "./Home"
 
 const URI = "http://localhost:5555/graphql"
@@ -37,6 +38,9 @@ export default function App() {
           <li>
             <NavLink exact activeClassName="selected" to="/addFriend">Add Friend</NavLink>
           </li>
+          <li>
+            <NavLink exact activeClassName="selected" to="/deleteFriend">Delete Friend</NavLink>
+          </li>
         </ul>
 
         <hr />
@@ -55,6 +59,9 @@ export default function App() {
             </Route>
             <Route path="/addFriend">
               <AddFriend />
+            </Route>
+            <Route path="/deleteFriend">
+              <DeleteFriend />
             </Route>
 
           </Switch>
