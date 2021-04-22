@@ -54,13 +54,17 @@ app.use(express.static(path.join(process.cwd(), "public")))
 
 // cors are only being used on the below endpoints (our api etc. - not the above ones - as intended)
 // Own CORS Middleware
-/*import cors from "./middleware/myCors"
-app.use(cors);*/
+const cors = require("cors");
+app.use(cors()); //Enables Cors for All CORS requests. Cors can also be enables for a single route.
 
 app.use("/api/friends", friendsRoutesAuth)
 
 // Auth middleware for graphql:
 //app.use("/graphql", authMiddleware)
+// Also authmiddleware, but better handled for create: (see Lars' video from around 14th april ish for info)
+
+//import authMiddleware from "../middleware/basic-auth"
+const USE_AUTHENTICATION = false;
 
 app.use("/graphql", (req, res, next) => {
   const body = req.body;
@@ -72,7 +76,9 @@ app.use("/graphql", (req, res, next) => {
     return next();
   }
   if (body.query && (body.mutation || body.query)) {
+    if (USE_AUTHENTICATION) {
     return authMiddleware(req, res, next)
+    }
   }
   next()
 })
@@ -80,6 +86,7 @@ app.use("/graphql", (req, res, next) => {
 import { graphqlHTTP } from 'express-graphql';
 import { schema } from './graphql/schema';
 
+// Probably not needed anymore.
 app.use('/graphql', graphqlHTTP({
   schema: schema,
   graphiql: true,

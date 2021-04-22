@@ -1,7 +1,8 @@
+/* For the old Facade. Only use for Examples.
 import { Router } from "express"
 const router = Router();
 
-import facade from "../facades/DummyDB-Facade"
+//import facade from "../facades/DummyDB-Facade"
 import {ApiError} from "../errors/apiError"
 
 const cors = require("cors");
@@ -69,3 +70,4 @@ router.delete("/delete", async (req, res) => {
 })
 
 export default router
+*/

@@ -23,9 +23,12 @@ export const resolvers = {
   Query: {
 
     getAllFriends: (root: any, _: any, req: any) => {
-      if (/* !req.credentials */!req.credentials.role || req.credentials.role !== "admin") {
-        throw new ApiError("Not Authorized", 401)
-      }
+
+      // Todo after authentication:
+      
+      //if (/* !req.credentials */!req.credentials.role || req.credentials.role !== "admin") {
+     //   throw new ApiError("Not Authorized", 401)
+     // }
       return friendFacade.getAllFriendsV2()
     },
 
@@ -45,7 +48,7 @@ export const resolvers = {
   },
 
   // could have used IFriend and FriendEmailInput in schema.ts instead of a string as type, like on deleteFriend. But doing both, to show either works.
-  getFriendByEmail: (root: any, { input }: { input: string }) => {
+  getFriendByEmail: async (_: object, { input }: { input: string }) => {
     return friendFacade.getFriendFromEmail(input);
     }
   },
