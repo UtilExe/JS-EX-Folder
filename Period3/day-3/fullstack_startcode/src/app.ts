@@ -64,7 +64,6 @@ app.use("/api/friends", friendsRoutesAuth)
 // Also authmiddleware, but better handled for create: (see Lars' video from around 14th april ish for info)
 
 //import authMiddleware from "../middleware/basic-auth"
-//const USE_AUTHENTICATION = false;
 
 app.use("/graphql", (req, res, next) => {
   const body = req.body;
@@ -76,9 +75,7 @@ app.use("/graphql", (req, res, next) => {
     return next();
   }
   if (body.query && (body.mutation || body.query)) {
-  //  if (USE_AUTHENTICATION) {
     return authMiddleware(req, res, next)
-  //  }
   }
   next()
 })
