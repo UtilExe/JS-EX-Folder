@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css"
+import "../App.css"
 import {
   //BrowserRouter as Router,
   Switch,
@@ -13,9 +13,12 @@ import Header from "./Header"
 import AddFriend from "./AddFriend";
 import AllFriends from "./AllFriends"
 import FindFriend from "./FindFriend"
+import DeleteFriend from "./DeleteFriend"
+import EditFriend from "./EditFriend"
 import Login from "./Login"
 import Home from "./Home"
 import settings from "../settings.json"
+
 const graphqlURL = settings.graphqlEndpoint;
 
 const httpLink = createHttpLink({ uri: graphqlURL })
