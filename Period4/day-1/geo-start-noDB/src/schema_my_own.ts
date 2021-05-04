@@ -53,7 +53,7 @@ type Query {
   """Returns a GeoJson Polygon representing the legal gameArea"""
   gameArea : Coordinates 
 
-  """ Check whether caller, given his latitude and lontitude, is inside the gameArea """
+  """ Check whether caller, given his latitude and longitude, is inside the gameArea """
   isUserInArea("""Callers latitude""" latitude:Float!, """ Callers longitude """ longitude:Float!):Status!
 
   """ Given callers latitude and longitude all nearby Teams will be found (inside the given radius) """
