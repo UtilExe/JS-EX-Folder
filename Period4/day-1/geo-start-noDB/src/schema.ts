@@ -1,6 +1,6 @@
 import { makeExecutableSchema } from 'graphql-tools';
 import { resolvers } from './resolvers';
- 
+
 const typeDefs = `#graphql
  
 type Status{
@@ -16,8 +16,11 @@ type Coordinate {
   longitude:Float!
 }
  
-type Coordinates {
+type CoordinatesPelle {
   coordinates: [[[Float]]]
+}
+type Coordinates {
+  coordinates: [Coordinate]
 }
  
 type Point {
@@ -59,10 +62,12 @@ type Query {
  
   """Returns a GeoJson Polygon representing the legal gameArea"""
    gameArea : Coordinates
+   
+   gameArea_VersionPelle : CoordinatesPelle
  
    """Check whether caller, given his latitude and longitude, is inside the gameArea"""
    isUserInArea("Callers latitude" latitude: Float!,"Callers longitude" longitude:Float!) : Status!
- 
+    
    """Given callers latitude and longitude all nearby Teams will be found (inside the given radius)"""
    findNearbyPlayers(latitude: Float!, longitude: Float!,distance: Int!):[Player]!
    
@@ -75,8 +80,7 @@ type Query {
                   "user to find" userName: String) : User 
 }
 `
- 
-const schema = makeExecutableSchema({ typeDefs, resolvers });
- 
-export { schema }
 
+const schema = makeExecutableSchema({ typeDefs, resolvers });
+
+export { schema }
