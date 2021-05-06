@@ -50,10 +50,11 @@ describe("## Verify the Positions Facade ##", () => {
     })
 
     describe("Verify the addOrUpdatePosition method", () => {
-        xit("It should update pp@b.dk's position document", async () => {
+        it("It should update pp@b.dk's position document", async () => {
             const result = await positionFacade.addOrUpdatePosition("pp@b.dk", 2, 3)
             expect(result.name).to.be.equal("Peter Pan")
             expect(result.location.coordinates[0]).to.be.equal(2)
+            expect(result.location.coordinates[1]).to.be.equal(3)
         })
     })
 

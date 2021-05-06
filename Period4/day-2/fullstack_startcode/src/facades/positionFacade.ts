@@ -18,7 +18,21 @@ class PositionFacade {
   }
 
   async addOrUpdatePosition(email: string, longitude: number, latitude: number): Promise<IPosition> {
-    throw new Error("Not Implemented")
+    // 1) Find friend in Friend Collection (Hvad gør vi med fejl?)
+    const friend = await this.friendFacade.getFriendFromEmail(email)
+    // 2) Lav name ud fra Firstname + lastName
+    const fullName = friend.firstName + " " + friend.lastName;
+
+    // 3) Lav position
+    const query = { email };
+    const pos:IPosition = {lastUpdated:new Date(), email, name:fullName, location: {type: "Point", coordinates: [longitude, latitude]}}
+    const update = {
+        $set: { ...pos }
+      }
+
+    const options = {upsert:true, returnOriginal: false} // upsert true: hvis ikke den finder den, så laver den det.
+    const result = await this.positionCollection.findOneAndUpdate(query, update, options)
+    return result.value;
   }
 
   async findNearbyFriends(email: string, password: string, longitude: number, latitude: number, distance: number): Promise<Array<IPosition>> {
