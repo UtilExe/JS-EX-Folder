@@ -25,25 +25,41 @@ class PositionFacade {
 
     // 3) Lav position
     const query = { email };
-    const pos:IPosition = {lastUpdated:new Date(), email, name:fullName, location: {type: "Point", coordinates: [longitude, latitude]}}
+    const pos: IPosition = { lastUpdated: new Date(), email, name: fullName, location: { type: "Point", coordinates: [longitude, latitude] } }
     const update = {
-        $set: { ...pos }
-      }
+      $set: { ...pos }
+    }
 
-    const options = {upsert:true, returnOriginal: false} // upsert true: hvis ikke den finder den, så laver den det.
+    const options = { upsert: true, returnOriginal: false } // upsert true: hvis ikke den finder den, så laver den det.
     const result = await this.positionCollection.findOneAndUpdate(query, update, options)
     return result.value;
   }
 
   async findNearbyFriends(email: string, password: string, longitude: number, latitude: number, distance: number): Promise<Array<IPosition>> {
-    throw new Error("Not Implemented")
+    // 1) Check om han findes
+    // bruges i kaldet i addOrUpdatePosition const friend = await this.friendFacade.getFriendFromEmail(email)
+    // Alternative instead of getFriendFromEmail, to check for password too: this.friendFacade.getVerifiedUser()
+    // 2) Opdater position
+    await this.addOrUpdatePosition(email, longitude, latitude)
+
+    return this.positionCollection.find({
+      email: {$ne:email}, // not equal, so we dont consider our own email
+      location: {
+        $near: {
+          $geometry: {
+            type: "Point",
+            coordinates: [longitude, latitude]
+          },
+          $maxDistance: distance
+        }
+      }
+    }).toArray()
   }
 
   async getAllPositions(): Promise<Array<IPosition>> {
     return this.positionCollection.find({}).toArray();
   }
-
-
+  
 }
 
 export default PositionFacade;

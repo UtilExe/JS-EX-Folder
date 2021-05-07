@@ -30,9 +30,9 @@ async function makeTestPositions() {
 
   const positions = [//Longtitude, Latitude
     positionCreator(12.48, 55.77, f1.email, f1.firstName + " " + f1.lastName, true),
-    positionCreator(12.49, 55.77, f2.email, f2.firstName + " " + f2.lastName, true),
-    positionCreator(12.50, 55.77, f3.email, f3.firstName + " " + f3.lastName, true),
-    positionCreator(12.51, 55.77, "a@aaa.dk", "James Bond", false),
+    positionCreator(12.481, 55.77, f2.email, f2.firstName + " " + f2.lastName, true),
+    positionCreator(12.482, 55.77, f3.email, f3.firstName + " " + f3.lastName, true),
+    positionCreator(12.483, 55.77, "a@aaa.dk", "James Bond", false),
   ]
   const status2 = await positionCollection.insertMany(positions)
   debug(`Inserted ${status2.insertedCount} test Positions`)

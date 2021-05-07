@@ -60,13 +60,13 @@ describe("## Verify the Positions Facade ##", () => {
 
     //Whether this test passed depends on whether you have designed it to throw an exception
     describe("Verify the addOrUpdatePosition method", () => {
-        xit("It should not update XXXX@b.dk's position document", async () => {
+        it("It should not update XXXX@b.dk's position document", async () => {
             await expect(positionFacade.addOrUpdatePosition("XXXX@b.dk", 2, 3)).to.be.rejectedWith(ApiError)
         })
     })
 
     describe("Verify the findNearbyFriends method", () => {
-        xit("Should Not find ", async () => {
+        it("Should Not find ", async () => {
             const result = await positionFacade.findNearbyFriends("pp@b.dk", "secret", 12.48, 55.77, DIST_TO_SEARCH)
             expect(result.length).to.be.equal(1)
             expect(result[0].name).to.be.equal("Donald Duck")
