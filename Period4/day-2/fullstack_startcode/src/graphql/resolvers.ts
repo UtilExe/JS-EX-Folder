@@ -15,6 +15,14 @@ interface IPositionInput {
   latitude: number
 }
 
+interface IFriendNearbyInput {
+  email: string
+  password: string
+  longitude: number
+  latitude: number
+  distance: number
+}
+
 /*
 We don't have access to app or the Router so we need to set up the facade in another way
 In www.ts IMPORT and CALL the method below, like so: 
@@ -74,13 +82,16 @@ export const resolvers = {
       const est = friendFacade.deleteFriend(input.email)
       return est;
     },
-    addPosition: async (_: object, { input }: {input: IPositionInput }) => {
+    addPosition: async (_: object, { input }: { input: IPositionInput }) => {
       try {
-      positionFacade.addOrUpdatePosition(input.email, input.longitude, input.latitude)
-      return true;
-    } catch (err) {
-      return false;
-    }
-    }
+        positionFacade.addOrUpdatePosition(input.email, input.longitude, input.latitude)
+        return true;
+      } catch (err) {
+        return false;
+      }
+    },
+    findNearbyFriends: async (_: object, { input }: { input: IFriendNearbyInput }) => {
+      return positionFacade.findNearbyFriends(input.email, input.password, input.longitude, input.latitude, input.distance)
+    },
   },
 };

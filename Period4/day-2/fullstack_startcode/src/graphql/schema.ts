@@ -10,6 +10,28 @@ const typeDefs = `#graphql
         email: String
         role: String
     }
+    type FriendWithPosition {
+        email: String
+        password: String
+        location: Point 
+    }
+
+    type Coordinate {
+        latitude: Float!
+        longitude:Float!
+    }
+ 
+    type Coordinates {
+        coordinates: [[[Float]]]
+    }
+
+    type Point {
+    """Will ALWAYS have the value Point"""
+        type: String
+    """Array with longitude followed by latitude [lon,lat]"""
+        coordinates: [Float]
+    }
+
     """
     Queries available for Friends
     """
@@ -45,6 +67,13 @@ const typeDefs = `#graphql
         longitude: Float!
         latitude: Float!
     }
+    input NearbyFriendsInput {
+        email: String!
+        password: String
+        longitude: Float!
+        latitude: Float!
+        distance: Float!
+    }
     type Mutation {
         """
         Allows anyone (non authenticated users) to create a new friend
@@ -56,6 +85,8 @@ const typeDefs = `#graphql
         deleteFriend(input:FriendEmailInput): Boolean
         
         addPosition(input:PositionInput): Boolean
+
+        findNearbyFriends(input:NearbyFriendsInput): [FriendWithPosition]
        
     }
 `;

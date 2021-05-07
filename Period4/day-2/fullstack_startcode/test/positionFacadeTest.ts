@@ -74,7 +74,7 @@ describe("## Verify the Positions Facade ##", () => {
     })
 
     describe("Verify the findNearbyFriends method", () => {
-        xit("Should Not find xxxxxxxx@b.dk", async () => {
+        it("Should Not find xxxxxxxx@b.dk", async () => {
             await expect(positionFacade.findNearbyFriends("xxxxxxxx@b.dk", "secret", 12.48, 55.77, DIST_TO_SEARCH)).to.be.rejectedWith(ApiError)
         })
     })
